@@ -13,10 +13,12 @@ app.set('view engine', 'ejs'); //template engine
 app.use(bodyParser.urlencoded({ extended: true })); //for parsing application/x-www-form-urlencoded
 app.use(bodyParser.json()); //for parsing JSON
 
+/*
 var httpOptions = {
     key: fs.readFileSync('key.pem'),
     cert: fs.readFileSync('cert.pem')
 }
+*/
 
 //Routes
 app.get("/", (req, res) => {
