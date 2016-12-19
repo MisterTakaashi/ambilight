@@ -2,8 +2,8 @@
 
 Set Philips Hue light color depending on vibrant webcam picture color.
 
-Installation:
-1. git clone
-2. npm install
-3. node server.js
-4. have fun :) 
+Installation: </br>
+1. git clone </br>
+2. npm install </br>
+3. node server.js </br>
+4. have fun :) </br>
