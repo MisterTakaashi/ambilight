@@ -1,5 +1,9 @@
 # Ambilight test project with a Philips Hue system
 
-Installation
+Set Philips Hue light color depending on vibrant webcam picture color.
 
--> Clone it and just do a npm install
+Installation:
+1. git clone
+2. npm install
+3. node server.js
+4. have fun :) 
