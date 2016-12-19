@@ -251,6 +251,9 @@ var jsHueAPI = function(XMLHttpRequest, JSON) {
              */
             var _bridgeUrl = _sub('http://{ip}/api', { ip: ip });
             return {
+                setUsername: function(username){
+                    _username = username;
+                },
                 /**
                  * Creates new user in bridge whitelist.
                  *
