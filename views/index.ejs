@@ -3,16 +3,18 @@
     <head>
         <meta charset="UTF-8">
         <title>Camera Test</title>
-        <script src="./js/dist/Vibrant.js"></script>
-        <script src="./js/dist/jquery.js"></script>
-        <script src="./js/dist/jshue.js"></script>
+
+	<script src="/socket.io/socket.io.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/vibrant.js/1.0.0/Vibrant.min.js" integrity="sha512-V6rhYmJy8NZQF8F0bhJiTM0iI6wX/FKJoWvYrCM15UIeb6p38HjvTZWfO0IxJnMZrHWUJZJqLuWK0zslra2FVw==" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/jshue@2.1.1/src/jshue.min.js"></script>
         <script src="./js/video.js"></script>
         <link rel="stylesheet" href="css/main.css">
     </head>
     <body>
         <div class="booth">
             <video id="video" width="400" height="300" autoplay></video>
-            <canvas id="canvas" width="400" height="300" style="display: none;"></canvas>
+            <canvas id="canvas" width="400" height="300"></canvas>
         </div>
         <div id="colorlist" class="myfloat">
             <div class="mycolor" style="background: #00ffff;">

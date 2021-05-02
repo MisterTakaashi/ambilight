@@ -1,6 +1,77 @@
-$(function(){
+const Philips = class {
+  constructor(hue) {
+    console.log('Initializing Philips object');
+    this.hue = hue;
+  }
+}
 
-	var Video = {
+const initBridge = () => {
+  const philips = new Philips(jsHue());
+};
+
+const transitionTime = 1000 / 5;
+
+$(function(){
+  const socket = io();
+
+  socket.emit('transitionTime', transitionTime);
+
+  const canvas = $('#canvas')[0];
+  const context = canvas.getContext('2d');
+  const video = $('#video')[0];
+
+  const processColor = (img1) => {
+    const swatches = new Vibrant(img1).swatches();
+
+    $("#colorlist").empty();
+
+    const colors = {};
+    for (swatch in swatches){
+      if (swatches.hasOwnProperty(swatch) && swatches[swatch]){
+	const rgb = swatches[swatch].getRgb();
+	const hex = swatches[swatch].getHex();
+	//draw a div in the corresponding color
+	$("#colorlist").append('<div class="mycolor" style="background: ' + hex + ';">' + swatch + '</div>');
+
+	colors[swatch] = rgb;
+	}
+    }
+
+    console.log('Emiting cvolors', socket.connected)
+    socket.emit('colors', colors);
+  };
+
+  const processVideo = () => {
+    context.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+    try {
+      const frame = context.getImageData(0, 0, canvas.width, canvas.height);
+      const length = frame.data.length;
+      const picture = canvas.toDataURL('image/jpeg');
+
+      const img1 = new Image();
+      img1.onload = () => {
+	processColor(img1);
+      }
+      img1.src = picture;
+    } catch(err) {
+      console.log(err);
+    } finally {
+      setTimeout(processVideo, transitionTime);
+  };
+}
+
+  navigator.getUserMedia({video: true, audio: false}, (stream) => {
+    video.srcObject = stream;
+
+    processVideo();
+
+    initBridge();
+  }, (err) => {
+    console.error('Cannot get the camera strem :\'(', err);
+  });
+
+	/*var Video = {
 		canvas: 	document.getElementById('canvas'),
 		context: 	canvas.getContext('2d'),
 		video: 		document.getElementById('video'),
@@ -17,7 +88,7 @@ $(function(){
 				video: true,
 				audio: false
 				}, function(stream){
-					video.src = Video.vendorURL.createObjectURL(stream);
+					video.srcObject = stream;
 					video.play();
 				}, function(error){
 
@@ -67,6 +138,7 @@ $(function(){
 			img.setAttribute('src', picture);
 
 			//instanciate the vibrant library
+			console.log(img)
 			var vibrant = new Vibrant(img);
 			var swatches = vibrant.swatches();
 			for (swatch in swatches){
@@ -217,7 +289,7 @@ $(function(){
 		}
 	}
 
-	Video.init();
+  Video.init();*/
 
 });
 
